@@ -47,7 +47,7 @@ class Posting {
 		await this.core.bot.goto("https://www.instagram.com");
 		try {
 
-			let selector = "nav div div:nth-child(2) div:nth-child(3) span";
+			let selector = "svg[aria-label=\"New Post\"]";
 			await this.core.bot.waitForSelector(selector, {timeout: 5000});
 			let path_assets = `assets/${uri}`;
 			let file_path = path.relative(process.cwd(), path_assets);
@@ -74,8 +74,7 @@ class Posting {
 			await button_share.click();
 			await this.utils.sleep(this.utils.random_interval(3, 4));
 
-			let selector_done = "span[aria-label=\"Instagram\"]";
-			await this.core.bot.waitForSelector(selector_done, {timeout: 30000});
+			await this.core.bot.waitForSelector(selector, {timeout: 30000});
 			
 			response.status = true;
 		} catch (err) {
